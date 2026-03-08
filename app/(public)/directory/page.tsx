@@ -1,9 +1,7 @@
 import { Suspense } from 'react'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
-import OrphanageCard from '@/components/public/orphanages/OrphanageCard'
 import DirectoryFilters from '@/components/public/orphanages/DirectoryFilters'
-import { Button } from '@/components/ui/button'
-import Link from 'next/link'
+import DirectoryViewToggle from '@/components/public/orphanages/DirectoryViewToggle'
 import type { Orphanage } from '@/lib/types'
 
 interface PageProps {
@@ -82,10 +80,39 @@ export default async function DirectoryPage({ searchParams }: PageProps) {
   if (acceptsDonations === 'true') query = query.eq('accepts_donations', true)
   if (acceptsVolunteers === 'true') query = query.eq('accepts_volunteers', true)
 
-  const { data, count } = await query
+  // Map query: all orphanages with coordinates (same filters, no pagination)
+  let mapQuery = supabase
+    .from('orphanages')
+    .select(
+      'id, name, slug, area, latitude, longitude, uraan_visited, visit_count, children_count, org_type'
+    )
+    .eq('is_active', true)
+    .not('latitude', 'is', null)
+    .not('longitude', 'is', null)
+
+  if (search) {
+    const term = `%${search}%`
+    mapQuery = mapQuery.or(`name.ilike.${term},area.ilike.${term},address.ilike.${term}`)
+  }
+  if (areas.length === 1) mapQuery = mapQuery.eq('area', areas[0]!)
+  if (areas.length > 1) mapQuery = mapQuery.in('area', areas)
+  if (orgTypes.length === 1) mapQuery = mapQuery.eq('org_type', orgTypes[0]!)
+  if (orgTypes.length > 1) mapQuery = mapQuery.in('org_type', orgTypes)
+  if (isRegistered === 'true') mapQuery = mapQuery.eq('is_registered', true)
+  if (uraanVisited === 'true') mapQuery = mapQuery.eq('uraan_visited', true)
+  if (acceptsDonations === 'true') mapQuery = mapQuery.eq('accepts_donations', true)
+  if (acceptsVolunteers === 'true') mapQuery = mapQuery.eq('accepts_volunteers', true)
+
+  const [{ data, count }, { data: mapData }] = await Promise.all([query, mapQuery])
+
   const orphanages = (data ?? []) as Orphanage[]
+  const mapOrphanages = (mapData ?? []) as Orphanage[]
   const total = count ?? 0
   const totalPages = Math.ceil(total / limit)
+
+  function buildPageHref(p: number) {
+    return `/directory?${buildQueryString(params, { page: String(p) })}`
+  }
 
   return (
     <div className="mx-auto max-w-[1200px] px-6 py-12">
@@ -113,59 +140,19 @@ export default async function DirectoryPage({ searchParams }: PageProps) {
           </Suspense>
         </div>
 
-        {/* ── Card Grid ── */}
+        {/* ── Content area: Grid or Map ── */}
         <div className="min-w-0 flex-1">
-          {orphanages.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-24 text-center">
-              <span className="mb-4 text-5xl">🔍</span>
-              <h3 className="mb-2 text-xl font-semibold text-[--color-text-primary]">
-                No orphanages found
-              </h3>
-              <p className="mb-6 text-[--color-text-secondary]">
-                Try adjusting your search or filters.
-              </p>
-              <Link href="/directory">
-                <Button variant="outline">Clear all filters</Button>
-              </Link>
-            </div>
-          ) : (
-            <>
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
-                {orphanages.map((orphanage) => (
-                  <OrphanageCard key={orphanage.id} orphanage={orphanage} />
-                ))}
-              </div>
-
-              {/* Pagination */}
-              {totalPages > 1 && (
-                <div className="mt-10 flex items-center justify-between text-sm text-[--color-text-secondary]">
-                  <span>
-                    Page {page} of {totalPages} ({total} total)
-                  </span>
-                  <div className="flex gap-3">
-                    {page > 1 && (
-                      <Link
-                        href={`/directory?${buildQueryString(params, { page: String(page - 1) })}`}
-                      >
-                        <Button variant="outline" size="sm">
-                          Previous
-                        </Button>
-                      </Link>
-                    )}
-                    {page < totalPages && (
-                      <Link
-                        href={`/directory?${buildQueryString(params, { page: String(page + 1) })}`}
-                      >
-                        <Button variant="outline" size="sm">
-                          Next
-                        </Button>
-                      </Link>
-                    )}
-                  </div>
-                </div>
-              )}
-            </>
-          )}
+          <Suspense>
+            <DirectoryViewToggle
+              orphanages={orphanages}
+              mapOrphanages={mapOrphanages}
+              total={total}
+              page={page}
+              totalPages={totalPages}
+              prevHref={page > 1 ? buildPageHref(page - 1) : null}
+              nextHref={page < totalPages ? buildPageHref(page + 1) : null}
+            />
+          </Suspense>
         </div>
       </div>
     </div>

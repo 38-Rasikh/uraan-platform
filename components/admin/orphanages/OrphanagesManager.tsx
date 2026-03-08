@@ -2,7 +2,17 @@
 
 import { useState, useCallback } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { Plus, Pencil, Trash2, Search, ChevronUp, ChevronDown, X } from 'lucide-react'
+import {
+  Plus,
+  Pencil,
+  Trash2,
+  Search,
+  ChevronUp,
+  ChevronDown,
+  X,
+  Download,
+  Upload,
+} from 'lucide-react'
 import {
   Table,
   TableBody,
@@ -16,6 +26,8 @@ import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import OrphanageDrawer from './OrphanageDrawer'
 import DeleteOrphanageDialog from './DeleteOrphanageDialog'
+import ImportZone from './ImportZone'
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet'
 import type { Orphanage } from '@/lib/types'
 
 interface OrphanagesManagerProps {
@@ -95,6 +107,8 @@ export default function OrphanagesManager({
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [editTarget, setEditTarget] = useState<Orphanage | null>(null)
   const [deleteTarget, setDeleteTarget] = useState<Orphanage | null>(null)
+  const [importOpen, setImportOpen] = useState(false)
+  const [exporting, setExporting] = useState(false)
 
   const totalPages = Math.ceil(total / limit)
 
@@ -132,9 +146,30 @@ export default function OrphanagesManager({
     router.push('/admin/orphanages')
   }
 
-  // After create/edit/delete, tell Next.js to re-run the server component
+  // After create/edit/delete/import, tell Next.js to re-run the server component
   const refreshData = () => {
     router.refresh()
+  }
+
+  const handleExport = async () => {
+    setExporting(true)
+    try {
+      const res = await fetch('/api/v1/export?resource=orphanages')
+      if (!res.ok) return
+      const blob = await res.blob()
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = `uraan-orphanages-${new Date().toISOString().slice(0, 10)}.xlsx`
+      document.body.appendChild(a)
+      a.click()
+      a.remove()
+      URL.revokeObjectURL(url)
+    } catch {
+      // silently handled
+    } finally {
+      setExporting(false)
+    }
   }
 
   const handleOpenAdd = () => {
@@ -177,13 +212,34 @@ export default function OrphanagesManager({
           </Button>
         </form>
 
-        <Button
-          onClick={handleOpenAdd}
-          className="gap-2 bg-[#E8620A] text-white hover:bg-[#d05509]"
-        >
-          <Plus className="h-4 w-4" />
-          Add Orphanage
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => void handleExport()}
+            disabled={exporting}
+            className="gap-1.5 border-zinc-700 text-zinc-300 hover:bg-zinc-800"
+          >
+            <Download className="h-4 w-4" />
+            {exporting ? 'Exporting…' : 'Export'}
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setImportOpen(true)}
+            className="gap-1.5 border-zinc-700 text-zinc-300 hover:bg-zinc-800"
+          >
+            <Upload className="h-4 w-4" />
+            Import
+          </Button>
+          <Button
+            onClick={handleOpenAdd}
+            className="gap-2 bg-[#E8620A] text-white hover:bg-[#d05509]"
+          >
+            <Plus className="h-4 w-4" />
+            Add Orphanage
+          </Button>
+        </div>
       </div>
 
       {/* ── Row 2: Dropdown filters ── */}
@@ -400,6 +456,30 @@ export default function OrphanagesManager({
           onDeleted={refreshData}
         />
       )}
+
+      {/* Import sheet */}
+      <Sheet open={importOpen} onOpenChange={setImportOpen}>
+        <SheetContent
+          side="right"
+          className="w-full overflow-y-auto border-zinc-800 bg-zinc-950 sm:max-w-2xl"
+        >
+          <SheetHeader className="mb-6">
+            <SheetTitle className="text-white">Import Orphanages</SheetTitle>
+          </SheetHeader>
+          <div className="space-y-2">
+            <p className="text-sm text-zinc-400">
+              Upload an .xlsx or .csv file. All rows are validated before any data is written — fix
+              all errors and re-upload if validation fails.
+            </p>
+            <ImportZone
+              onImportSuccess={() => {
+                setImportOpen(false)
+                refreshData()
+              }}
+            />
+          </div>
+        </SheetContent>
+      </Sheet>
     </div>
   )
 }

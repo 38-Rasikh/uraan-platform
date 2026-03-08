@@ -87,11 +87,15 @@ export interface TeamMember {
   full_name: string
   role: string
   department: string | null
+  batch: string | null
   bio: string | null
   photo_url: string | null
+  phone: string | null
   linkedin_url: string | null
-  session_year: string | null
+  joined_date: string | null
+  left_date: string | null
   is_active: boolean
+  is_founding_member: boolean
   sort_order: number
   created_at: string
   updated_at: string

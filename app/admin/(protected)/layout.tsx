@@ -13,7 +13,7 @@ export default async function AdminProtectedLayout({ children }: { children: Rea
       {/* Main content area */}
       <div className="flex flex-1 flex-col overflow-hidden">
         <AdminHeader userEmail={user.email} />
-        <main className="flex-1 overflow-y-auto bg-zinc-900 p-6">{children}</main>
+        <main className="flex-1 overflow-y-auto bg-zinc-900 p-6 text-zinc-100">{children}</main>
       </div>
     </div>
   )
