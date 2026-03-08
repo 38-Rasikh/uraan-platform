@@ -18,7 +18,7 @@ export function Footer() {
           <div className="space-y-3">
             <p className="text-lg font-semibold">Uraan</p>
             <p className="text-sm text-zinc-400">Igniting Minds, Empowering Futures</p>
-            <p className="text-sm text-zinc-500">Rehbar Project Division · UET Lahore</p>
+            <p className="text-sm text-zinc-500">Rahbar Project Division · UET Lahore</p>
           </div>
 
           {/* Links */}
@@ -51,7 +51,7 @@ export function Footer() {
 
         <div className="flex flex-col items-center justify-between gap-4 text-xs text-zinc-600 sm:flex-row">
           <p>© {new Date().getFullYear()} Uraan Society, UET Lahore. All rights reserved.</p>
-          <p>Built by Rehbar</p>
+          <p>Built by Rahbar</p>
         </div>
       </div>
     </footer>

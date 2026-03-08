@@ -51,7 +51,7 @@ export default function AdminLoginPage() {
         <div className="mb-8 text-center">
           <p className="text-2xl font-semibold text-white">Uraan</p>
           <p className="mt-1 text-xs uppercase tracking-widest text-zinc-500">
-            Admin Panel · Rehbar
+            Admin Panel · Rahbar
           </p>
         </div>
 

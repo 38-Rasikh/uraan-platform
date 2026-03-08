@@ -22,7 +22,7 @@ export function Navbar() {
         >
           <span className="text-lg font-semibold tracking-tight">Uraan</span>
           <span className="hidden text-xs text-[--color-text-muted] sm:block">
-            Rehbar · UET Lahore
+            Rahbar · UET Lahore
           </span>
         </Link>
 

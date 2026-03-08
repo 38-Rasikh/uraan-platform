@@ -10,7 +10,7 @@ const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrai
 export const metadata: Metadata = {
   title: 'Uraan — Igniting Minds, Empowering Futures',
   description:
-    'Uraan Outreach Platform — Rehbar Project Division, UET Lahore. Orphanage directory, projects, and volunteer programmes.',
+    'Uraan Outreach Platform — Rahbar Project Division, UET Lahore. Orphanage directory, projects, and volunteer programmes.',
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

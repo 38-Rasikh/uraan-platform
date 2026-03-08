@@ -8,7 +8,7 @@ export default function LandingPage() {
           Empowering Futures
         </h1>
         <p className="mt-4 text-[--color-text-secondary]">
-          Uraan — Rehbar Project Division, UET Lahore
+          Uraan — Rahbar Project Division, UET Lahore
         </p>
         <p className="mt-2 text-sm text-[--color-text-muted]">
           Landing page — Week 5 implementation
