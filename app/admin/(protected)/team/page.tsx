@@ -1,8 +1,8 @@
-import { createSupabaseServerClient } from '@/lib/supabase/server'
+import { createSupabaseServiceClient } from '@/lib/supabase/server'
 import TeamManager from '@/components/admin/team/TeamManager'
 
 export default async function TeamPage() {
-  const supabase = await createSupabaseServerClient()
+  const supabase = createSupabaseServiceClient()
 
   const { data: members } = await supabase
     .from('team_members')

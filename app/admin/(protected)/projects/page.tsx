@@ -1,8 +1,8 @@
-import { createSupabaseServerClient } from '@/lib/supabase/server'
+import { createSupabaseServiceClient } from '@/lib/supabase/server'
 import ProjectsManager from '@/components/admin/projects/ProjectsManager'
 
 export default async function ProjectsPage() {
-  const supabase = await createSupabaseServerClient()
+  const supabase = createSupabaseServiceClient()
 
   const { data: projects } = await supabase
     .from('projects')
