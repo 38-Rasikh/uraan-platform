@@ -1,6 +1,13 @@
 import { createSupabaseServerClient } from '@/lib/supabase/server'
 import TeamMemberCard from '@/components/public/team/TeamMemberCard'
+import type { Metadata } from 'next'
 import type { TeamMember } from '@/lib/types'
+
+export const metadata: Metadata = {
+  title: 'Our Team — Uraan Outreach Platform',
+  description:
+    'Meet the Uraan Rahbar Project Division team — the volunteers, coordinators, and founding members behind every visit.',
+}
 
 export const revalidate = 60
 

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { Badge } from '@/components/ui/badge'
 import { Linkedin, Star, ChevronDown, ChevronUp } from 'lucide-react'
 import type { TeamMember } from '@/lib/types'
@@ -32,10 +33,11 @@ export default function TeamMemberCard({ member }: { member: CardMember }) {
       {/* Avatar row */}
       <div className="mb-4 flex items-start justify-between">
         {member.photo_url ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <Image
             src={member.photo_url}
             alt={member.full_name}
+            width={64}
+            height={64}
             className="h-16 w-16 rounded-full object-cover ring-2 ring-[--color-border]"
           />
         ) : (

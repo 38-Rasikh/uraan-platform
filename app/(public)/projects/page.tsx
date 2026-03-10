@@ -1,8 +1,16 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
 import { Badge } from '@/components/ui/badge'
 import { Calendar, Users, BookOpen } from 'lucide-react'
+import type { Metadata } from 'next'
 import type { Project } from '@/lib/types'
+
+export const metadata: Metadata = {
+  title: 'Projects — Uraan Outreach Platform',
+  description:
+    'Explore completed and ongoing Uraan projects — education drives, welfare camps, and community outreach in Lahore orphanages.',
+}
 
 export const revalidate = 60
 
@@ -93,10 +101,11 @@ function ProjectCard({
         {/* Cover thumbnail */}
         {project.cover_image_url && (
           <div className="hidden flex-shrink-0 sm:block">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={project.cover_image_url}
               alt={project.title}
+              width={160}
+              height={112}
               className="h-28 w-40 rounded-lg object-cover"
             />
           </div>

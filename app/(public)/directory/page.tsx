@@ -3,7 +3,16 @@ import { createSupabaseServerClient } from '@/lib/supabase/server'
 import DirectoryFilters from '@/components/public/orphanages/DirectoryFilters'
 import DirectoryViewToggle from '@/components/public/orphanages/DirectoryViewToggle'
 import MobileFilterSheet from '@/components/public/orphanages/MobileFilterSheet'
+import type { Metadata } from 'next'
 import type { Orphanage } from '@/lib/types'
+
+export const metadata: Metadata = {
+  title: 'Orphanage Directory — Uraan Outreach Platform',
+  description:
+    'Browse the complete directory of orphanages in Lahore — filter by area, type, registration status, and Uraan visit history.',
+}
+
+export const revalidate = 60
 
 interface PageProps {
   searchParams: Promise<Record<string, string | string[] | undefined>>

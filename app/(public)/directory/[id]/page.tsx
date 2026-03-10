@@ -17,9 +17,36 @@ import {
   ArrowLeft,
 } from 'lucide-react'
 import type { Orphanage, Visit } from '@/lib/types'
+import type { Metadata } from 'next'
 
 interface PageProps {
   params: Promise<{ id: string }>
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { id } = await params
+  const supabase = await createSupabaseServerClient()
+  const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id)
+  const { data } = await (isUUID
+    ? supabase
+        .from('orphanages')
+        .select('name, area, address')
+        .eq('id', id)
+        .eq('is_active', true)
+        .maybeSingle()
+    : supabase
+        .from('orphanages')
+        .select('name, area, address')
+        .eq('slug', id)
+        .eq('is_active', true)
+        .maybeSingle())
+
+  if (!data) return {}
+
+  return {
+    title: `${data.name} — Uraan Orphanage Directory`,
+    description: `View location, contact details, and Uraan visit history for ${data.name} in ${data.area}, Lahore.`,
+  }
 }
 
 export default async function OrphanageProfilePage({ params }: PageProps) {

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { MapPin, Users, CheckCircle, Heart, HandHeart } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import type { Orphanage } from '@/lib/types'
@@ -40,11 +41,15 @@ export default function OrphanageCard({ orphanage: o }: OrphanageCardProps) {
     >
       {/* Cover image */}
       {o.cover_image_url ? (
-        <div
-          className="mb-4 h-40 w-full rounded-lg bg-cover bg-center"
-          style={{ backgroundImage: `url(${o.cover_image_url})` }}
-          aria-hidden="true"
-        />
+        <div className="relative mb-4 h-40 w-full overflow-hidden rounded-lg">
+          <Image
+            src={o.cover_image_url}
+            alt={o.name}
+            fill
+            className="object-cover"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          />
+        </div>
       ) : (
         <div className="mb-4 flex h-40 w-full items-center justify-center rounded-lg bg-[--color-surface-alt]">
           <span className="select-none text-3xl">🏠</span>

@@ -2,8 +2,35 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { loginSchema } from '@/lib/validators'
+import { checkRateLimit } from '@/lib/rateLimit'
+
+// 5 attempts per 60 seconds per IP address
+const RATE_LIMIT = 5
+const RATE_WINDOW_MS = 60_000
 
 export async function POST(request: NextRequest) {
+  // Rate limit by IP before touching any credentials
+  const ip =
+    request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ??
+    request.headers.get('x-real-ip') ??
+    'unknown'
+  const rl = checkRateLimit(`login:${ip}`, RATE_LIMIT, RATE_WINDOW_MS)
+
+  if (!rl.allowed) {
+    return NextResponse.json(
+      { error: 'Too many login attempts. Please try again later.', code: 'RATE_LIMITED' },
+      {
+        status: 429,
+        headers: {
+          'Retry-After': String(Math.ceil((rl.resetAt - Date.now()) / 1000)),
+          'X-RateLimit-Limit': String(RATE_LIMIT),
+          'X-RateLimit-Remaining': '0',
+          'X-RateLimit-Reset': String(Math.ceil(rl.resetAt / 1000)),
+        },
+      }
+    )
+  }
+
   try {
     const body = await request.json()
     const result = loginSchema.safeParse(body)
