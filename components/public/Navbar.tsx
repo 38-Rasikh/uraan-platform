@@ -7,6 +7,7 @@ const navLinks = [
   { href: '/directory', label: 'Directory' },
   { href: '/projects', label: 'Projects' },
   { href: '/team', label: 'Team' },
+  { href: '/about', label: 'About' },
   { href: '/connect', label: 'Connect' },
   { href: '/verify', label: 'Verify' },
 ]

@@ -1,19 +1,17 @@
+import HeroSection from '@/components/public/landing/HeroSection'
+import MissionStrip from '@/components/public/landing/MissionStrip'
+import ImpactHighlights from '@/components/public/landing/ImpactHighlights'
+import CounterStripWrapper from '@/components/public/landing/CounterStripWrapper'
+
+export const revalidate = 60
+
 export default function LandingPage() {
   return (
-    <div className="flex min-h-[60vh] items-center justify-center">
-      <div className="text-center">
-        <h1 className="font-display text-5xl font-bold text-[--color-text-primary]">
-          Igniting Minds,
-          <br />
-          Empowering Futures
-        </h1>
-        <p className="mt-4 text-[--color-text-secondary]">
-          Uraan — Rahbar Project Division, UET Lahore
-        </p>
-        <p className="mt-2 text-sm text-[--color-text-muted]">
-          Landing page — Week 5 implementation
-        </p>
-      </div>
-    </div>
+    <>
+      <HeroSection />
+      <CounterStripWrapper />
+      <ImpactHighlights />
+      <MissionStrip />
+    </>
   )
 }
