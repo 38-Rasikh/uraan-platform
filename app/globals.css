@@ -6,56 +6,48 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  /* ── Alt-text accessibility mode ─────────────────────────────────────── */
+  /* .img-caption-label spans are rendered next to images but hidden by default.
+     When data-alt-text="true" is on <html> they become visible as captions.   */
+  .img-caption-wrap {
+    display: block;
+    position: relative;
+  }
+  .img-caption-label {
+    display: none;
+    font-size: 11px;
+    line-height: 1.4;
+    padding: 3px 8px;
+    background: rgba(0, 0, 0, 0.78);
+    color: #fff;
+    border-radius: 0 0 6px 6px;
+    text-align: center;
+    width: 100%;
+  }
+  [data-alt-text='true'] .img-caption-label {
+    display: block;
+  }
 }
 
 @layer base {
+  /* ── Dark public theme (default for whole site) ─────────────────────── */
   :root {
-    /* ── Uraan Brand Tokens ─────────────────────────────── */
-    --color-bg: #fafafa;
-    --color-surface: #ffffff;
-    --color-surface-alt: #f4f4f5;
-    --color-border: #e4e4e7;
-    --color-text-primary: #09090b;
-    --color-text-secondary: #52525b;
-    --color-text-muted: #a1a1aa;
+    --color-bg: #09090b;
+    --color-surface: #18181b;
+    --color-surface-alt: #27272a;
+    --color-border: #3f3f46;
+    --color-text-primary: #fafafa;
+    --color-text-secondary: #d4d4d8;
+    --color-text-muted: #71717a;
     --color-accent: #e8620a;
-    --color-accent-muted: #fef3ec;
+    --color-accent-muted: rgba(232, 98, 10, 0.14);
     --color-admin-bg: #09090b;
     --color-admin-surface: #18181b;
 
-    /* ── shadcn/ui tokens (zinc scale) ──────────────────── */
-    --background: oklch(0.985 0 0); /* zinc-50  #fafafa  */
-    --foreground: oklch(0.145 0 0); /* zinc-950 #09090b  */
-    --card: oklch(1 0 0); /* white    #ffffff  */
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.145 0 0); /* zinc-950 */
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.967 0 0); /* zinc-100 */
-    --secondary-foreground: oklch(0.145 0 0);
-    --muted: oklch(0.967 0 0); /* zinc-100 */
-    --muted-foreground: oklch(0.556 0 0); /* zinc-500 */
-    --accent: oklch(0.967 0 0);
-    --accent-foreground: oklch(0.145 0 0);
-    --destructive: oklch(0.58 0.22 27);
-    --border: oklch(0.922 0 0); /* zinc-200 */
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.145 0 0);
-    --radius: 0.5rem;
-
-    /* Chart — orange-anchored palette */
-    --chart-1: oklch(0.646 0.222 41.116);
-    --chart-2: oklch(0.6 0.118 184.704);
-    --chart-3: oklch(0.398 0.07 227.392);
-    --chart-4: oklch(0.828 0.189 84.429);
-    --chart-5: oklch(0.769 0.188 70.08);
-  }
-
-  /* ── Admin dark theme ──────────────────────────────────── */
-  .dark {
+    /* shadcn/ui tokens — dark ───────────────────────────────────────────── */
     --background: oklch(0.145 0 0); /* zinc-950 */
-    --foreground: oklch(0.985 0 0);
+    --foreground: oklch(0.985 0 0); /* zinc-50  */
     --card: oklch(0.201 0 0); /* zinc-900 */
     --card-foreground: oklch(0.985 0 0);
     --popover: oklch(0.201 0 0);
@@ -72,11 +64,111 @@
     --border: oklch(1 0 0 / 10%);
     --input: oklch(1 0 0 / 15%);
     --ring: oklch(0.556 0 0);
+    --radius: 0.5rem;
+
+    /* Chart — orange-anchored palette */
     --chart-1: oklch(0.646 0.222 41.116);
     --chart-2: oklch(0.6 0.118 184.704);
     --chart-3: oklch(0.398 0.07 227.392);
     --chart-4: oklch(0.828 0.189 84.429);
     --chart-5: oklch(0.769 0.188 70.08);
+  }
+
+  /* ── Light theme (accessibility toggle: data-theme="light" on <html>) ─ */
+  [data-theme='light'] {
+    --color-bg: #fafafa;
+    --color-surface: #ffffff;
+    --color-surface-alt: #f4f4f5;
+    --color-border: #e4e4e7;
+    --color-text-primary: #09090b;
+    --color-text-secondary: #52525b;
+    --color-text-muted: #a1a1aa;
+    --color-accent: #e8620a;
+    --color-accent-muted: #fef3ec;
+
+    /* shadcn/ui tokens — light */
+    --background: oklch(0.985 0 0);
+    --foreground: oklch(0.145 0 0);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.145 0 0);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.145 0 0);
+    --primary: oklch(0.145 0 0);
+    --primary-foreground: oklch(0.985 0 0);
+    --secondary: oklch(0.967 0 0);
+    --secondary-foreground: oklch(0.145 0 0);
+    --muted: oklch(0.967 0 0);
+    --muted-foreground: oklch(0.556 0 0);
+    --accent: oklch(0.967 0 0);
+    --accent-foreground: oklch(0.145 0 0);
+    --destructive: oklch(0.58 0.22 27);
+    --border: oklch(0.922 0 0);
+    --input: oklch(0.922 0 0);
+    --ring: oklch(0.145 0 0);
+  }
+
+  /* ── Admin always dark (.dark class on admin layout wrapper) ─────────── */
+  .dark {
+    --background: oklch(0.145 0 0);
+    --foreground: oklch(0.985 0 0);
+    --card: oklch(0.201 0 0);
+    --card-foreground: oklch(0.985 0 0);
+    --popover: oklch(0.201 0 0);
+    --popover-foreground: oklch(0.985 0 0);
+    --primary: oklch(0.985 0 0);
+    --primary-foreground: oklch(0.145 0 0);
+    --secondary: oklch(0.269 0 0);
+    --secondary-foreground: oklch(0.985 0 0);
+    --muted: oklch(0.269 0 0);
+    --muted-foreground: oklch(0.708 0 0);
+    --accent: oklch(0.269 0 0);
+    --accent-foreground: oklch(0.985 0 0);
+    --destructive: oklch(0.704 0.191 22.216);
+    --border: oklch(1 0 0 / 10%);
+    --input: oklch(1 0 0 / 15%);
+    --ring: oklch(0.556 0 0);
+    --chart-1: oklch(0.646 0.222 41.116);
+    --chart-2: oklch(0.6 0.118 184.704);
+    --chart-3: oklch(0.398 0.07 227.392);
+    --chart-4: oklch(0.828 0.189 84.429);
+    --chart-5: oklch(0.769 0.188 70.08);
+  }
+
+  /* ── Text size accessibility ─────────────────────────────────────────── */
+  [data-text-size='sm'] {
+    font-size: 87.5%;
+  }
+  [data-text-size='md'] {
+    font-size: 100%;
+  }
+  [data-text-size='lg'] {
+    font-size: 115%;
+  }
+
+  /* ── High contrast ───────────────────────────────────────────────────── */
+  [data-high-contrast='true'] {
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #e4e4e7;
+    --color-text-muted: #d4d4d8;
+    --color-border: #a1a1aa;
+  }
+  [data-high-contrast='true'][data-theme='light'] {
+    --color-text-primary: #000000;
+    --color-text-secondary: #18181b;
+    --color-text-muted: #27272a;
+    --color-border: #09090b;
+  }
+
+  /* ── Colorblind filters (applied to <html> to avoid breaking sticky/
+     backdrop-blur stacking context inside body) ───────────────────────────── */
+  html[data-colorblind='achromatopsia'] {
+    filter: grayscale(100%);
+  }
+  html[data-colorblind='deuteranopia'] {
+    filter: url(#a11y-filter-deuteranopia);
+  }
+  html[data-colorblind='protanopia'] {
+    filter: url(#a11y-filter-protanopia);
   }
 
   * {

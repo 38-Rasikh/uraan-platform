@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { Menu } from 'lucide-react'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
-import { Button } from '@/components/ui/button'
+import AccessibilityWidget from '@/components/public/AccessibilityWidget'
 
 const navLinks = [
   { href: '/directory', label: 'Directory' },
@@ -14,8 +14,8 @@ const navLinks = [
 
 export function Navbar() {
   return (
-    <header className="bg-[--color-surface]/95 supports-[backdrop-filter]:bg-[--color-surface]/80 sticky top-0 z-50 w-full border-b border-[--color-border] backdrop-blur">
-      <div className="mx-auto flex h-16 max-w-container items-center justify-between px-6">
+    <header className="sticky top-0 z-50 w-full border-b border-[--color-border] bg-[--color-surface]">
+      <div className="mx-auto flex h-16 max-w-container items-center justify-between px-4 sm:px-6">
         {/* Brand */}
         <Link
           href="/"
@@ -28,48 +28,67 @@ export function Navbar() {
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden items-center gap-6 md:flex">
+        <nav className="hidden items-center gap-5 lg:flex" aria-label="Main navigation">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-[--color-text-secondary] transition-colors hover:text-[--color-text-primary]"
+              className="text-sm font-medium text-[--color-text-muted] transition-colors hover:text-[--color-text-primary] focus-visible:underline focus-visible:outline-none"
             >
               {link.label}
             </Link>
           ))}
-          <Link href="/directory">
-            <Button
-              size="sm"
-              className="hover:bg-[--color-accent]/90 bg-[--color-accent] text-white"
-            >
-              Explore Directory
-            </Button>
-          </Link>
         </nav>
 
-        {/* Mobile hamburger */}
-        <Sheet>
-          <SheetTrigger
-            className="inline-flex h-9 w-9 items-center justify-center rounded-md text-zinc-600 transition-colors hover:bg-zinc-100 hover:text-zinc-900 md:hidden"
-            aria-label="Open menu"
+        {/* Right side: CTA + Accessibility + Mobile trigger */}
+        <div className="flex items-center gap-3">
+          {/* CTA — hidden on small screens */}
+          <Link
+            href="/directory"
+            className="hidden rounded-md bg-[--color-accent] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[--color-accent] sm:block"
           >
-            <Menu className="h-5 w-5" />
-          </SheetTrigger>
-          <SheetContent side="right" className="w-64">
-            <nav className="mt-8 flex flex-col gap-4">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-base font-medium text-[--color-text-secondary] hover:text-[--color-text-primary]"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
-          </SheetContent>
-        </Sheet>
+            Explore Directory
+          </Link>
+
+          {/* Accessibility widget — always visible */}
+          <AccessibilityWidget />
+
+          {/* Mobile hamburger */}
+          <Sheet>
+            <SheetTrigger
+              className="flex h-8 w-8 items-center justify-center rounded-md border border-[--color-border] text-[--color-text-muted] transition-colors hover:border-[--color-accent] hover:text-[--color-text-primary] lg:hidden"
+              aria-label="Open navigation menu"
+            >
+              <Menu className="h-4 w-4" />
+            </SheetTrigger>
+            <SheetContent side="right" className="w-64 border-[--color-border] bg-[--color-bg] p-0">
+              <div className="flex h-16 items-center border-b border-[--color-border] px-6">
+                <span className="text-sm font-semibold text-[--color-text-primary]">
+                  Navigation
+                </span>
+              </div>
+              <nav className="flex flex-col p-4" aria-label="Mobile navigation">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="rounded-md px-3 py-2.5 text-sm font-medium text-[--color-text-secondary] transition-colors hover:bg-[--color-surface-alt] hover:text-[--color-text-primary]"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+                <div className="mt-4 border-t border-[--color-border] pt-4">
+                  <Link
+                    href="/directory"
+                    className="block rounded-md bg-[--color-accent] px-3 py-2.5 text-center text-sm font-semibold text-white hover:bg-orange-600"
+                  >
+                    Explore Directory
+                  </Link>
+                </div>
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </header>
   )

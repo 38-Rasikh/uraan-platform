@@ -46,7 +46,7 @@ export default function OrphanageCard({ orphanage: o }: OrphanageCardProps) {
           aria-hidden="true"
         />
       ) : (
-        <div className="mb-4 flex h-40 w-full items-center justify-center rounded-lg bg-zinc-100">
+        <div className="mb-4 flex h-40 w-full items-center justify-center rounded-lg bg-[--color-surface-alt]">
           <span className="select-none text-3xl">🏠</span>
         </div>
       )}
@@ -67,26 +67,35 @@ export default function OrphanageCard({ orphanage: o }: OrphanageCardProps) {
 
       {/* Badges row */}
       <div className="mb-4 flex flex-wrap gap-1.5">
-        <Badge variant="outline" className="border-zinc-200 text-xs text-zinc-600">
+        <Badge
+          variant="outline"
+          className="border-[--color-border] text-xs text-[--color-text-muted]"
+        >
           {ORG_TYPE_LABELS[o.org_type] ?? o.org_type}
         </Badge>
 
         {o.is_registered ? (
-          <Badge className="border border-green-200 bg-green-50 text-xs text-green-700">
+          <Badge className="border border-green-800/50 bg-green-900/20 text-xs text-green-400">
             <CheckCircle className="mr-1 h-3 w-3" /> Registered
           </Badge>
         ) : (
-          <Badge variant="outline" className="border-zinc-200 text-xs text-zinc-400">
+          <Badge
+            variant="outline"
+            className="border-[--color-border] text-xs text-[--color-text-muted]"
+          >
             Unregistered
           </Badge>
         )}
 
         {o.uraan_visited ? (
-          <Badge className="border border-[#E8620A]/30 bg-[#FEF3EC] text-xs text-[#E8620A]">
+          <Badge className="border-[--color-accent]/30 border bg-[--color-accent-muted] text-xs text-[--color-accent]">
             Uraan Visited
           </Badge>
         ) : (
-          <Badge variant="outline" className="border-zinc-200 text-xs text-zinc-400">
+          <Badge
+            variant="outline"
+            className="border-[--color-border] text-xs text-[--color-text-muted]"
+          >
             Not Yet Visited
           </Badge>
         )}

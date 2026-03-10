@@ -2,6 +2,7 @@ import { Suspense } from 'react'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
 import DirectoryFilters from '@/components/public/orphanages/DirectoryFilters'
 import DirectoryViewToggle from '@/components/public/orphanages/DirectoryViewToggle'
+import MobileFilterSheet from '@/components/public/orphanages/MobileFilterSheet'
 import type { Orphanage } from '@/lib/types'
 
 interface PageProps {
@@ -117,11 +118,23 @@ export default async function DirectoryPage({ searchParams }: PageProps) {
   return (
     <div className="mx-auto max-w-[1200px] px-6 py-12">
       {/* Page header */}
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold text-[--color-text-primary]">Orphanage Directory</h1>
-        <p className="mt-2 text-[--color-text-secondary]">
-          Exploring {total} orphanage{total !== 1 ? 's' : ''} across Lahore
-        </p>
+      <div className="mb-8 flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <h1 className="text-4xl font-bold text-[--color-text-primary]">Orphanage Directory</h1>
+          <p className="mt-2 text-[--color-text-secondary]">
+            Exploring {total} orphanage{total !== 1 ? 's' : ''} across Lahore
+          </p>
+        </div>
+        {/* Mobile filter trigger (hidden on lg+) */}
+        <MobileFilterSheet
+          search={search}
+          areas={areas}
+          orgTypes={orgTypes}
+          isRegistered={isRegistered}
+          uraanVisited={uraanVisited}
+          acceptsDonations={acceptsDonations}
+          acceptsVolunteers={acceptsVolunteers}
+        />
       </div>
 
       <div className="flex gap-8">

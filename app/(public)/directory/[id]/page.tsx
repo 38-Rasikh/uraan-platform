@@ -92,17 +92,17 @@ export default async function OrphanageProfilePage({ params }: PageProps) {
                 {ORG_TYPE_LABELS[o.org_type] ?? o.org_type}
               </Badge>
               {o.is_registered && (
-                <Badge className="border border-green-200 bg-green-50 text-xs text-green-700">
+                <Badge className="border border-green-800/50 bg-green-900/20 text-xs text-green-400">
                   <CheckCircle className="mr-1 h-3 w-3" /> Registered
                 </Badge>
               )}
               {o.uraan_visited && (
-                <Badge className="border border-[#E8620A]/30 bg-[#FEF3EC] text-xs text-[#E8620A]">
+                <Badge className="border-[--color-accent]/30 border bg-[--color-accent-muted] text-xs text-[--color-accent]">
                   Uraan Visited
                 </Badge>
               )}
               {o.is_verified && (
-                <Badge className="border border-blue-200 bg-blue-50 text-xs text-blue-700">
+                <Badge className="border border-blue-800/50 bg-blue-900/20 text-xs text-blue-400">
                   ✓ Verified
                 </Badge>
               )}
@@ -125,7 +125,7 @@ export default async function OrphanageProfilePage({ params }: PageProps) {
           {/* Children info */}
           <div className="mb-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
             {o.children_count != null && (
-              <div className="rounded-lg border border-zinc-200 bg-zinc-50 p-4 text-center">
+              <div className="rounded-lg border border-[--color-border] bg-[--color-surface-alt] p-4 text-center">
                 <div className="text-2xl font-bold text-[--color-text-primary]">
                   {o.children_count}
                 </div>
@@ -133,20 +133,20 @@ export default async function OrphanageProfilePage({ params }: PageProps) {
               </div>
             )}
             {o.age_range && (
-              <div className="rounded-lg border border-zinc-200 bg-zinc-50 p-4 text-center">
+              <div className="rounded-lg border border-[--color-border] bg-[--color-surface-alt] p-4 text-center">
                 <div className="text-lg font-bold text-[--color-text-primary]">{o.age_range}</div>
                 <div className="mt-1 text-xs text-[--color-text-muted]">Age Range</div>
               </div>
             )}
             {o.gender_served && (
-              <div className="rounded-lg border border-zinc-200 bg-zinc-50 p-4 text-center">
+              <div className="rounded-lg border border-[--color-border] bg-[--color-surface-alt] p-4 text-center">
                 <div className="text-lg font-bold text-[--color-text-primary]">
                   {GENDER_LABELS[o.gender_served]}
                 </div>
                 <div className="mt-1 text-xs text-[--color-text-muted]">Gender</div>
               </div>
             )}
-            <div className="rounded-lg border border-zinc-200 bg-zinc-50 p-4 text-center">
+            <div className="rounded-lg border border-[--color-border] bg-[--color-surface-alt] p-4 text-center">
               <div className="text-2xl font-bold text-[--color-text-primary]">{o.visit_count}</div>
               <div className="mt-1 text-xs text-[--color-text-muted]">
                 Uraan Visit{o.visit_count !== 1 ? 's' : ''}
@@ -282,7 +282,7 @@ export default async function OrphanageProfilePage({ params }: PageProps) {
 
           {/* Map placeholder (Week 3 — Leaflet) */}
           {o.latitude && o.longitude && (
-            <div className="flex h-48 items-center justify-center rounded-xl border border-[--color-border] bg-zinc-100 text-sm text-zinc-400">
+            <div className="flex h-48 items-center justify-center rounded-xl border border-[--color-border] bg-zinc-800 text-sm text-zinc-400">
               Map coming in Week 3
             </div>
           )}
@@ -327,7 +327,7 @@ export default async function OrphanageProfilePage({ params }: PageProps) {
                         {v.activities.map((act) => (
                           <span
                             key={act}
-                            className="rounded-full bg-zinc-100 px-2 py-0.5 text-xs text-zinc-600"
+                            className="rounded-full bg-zinc-800 px-2 py-0.5 text-xs text-zinc-400"
                           >
                             {act}
                           </span>

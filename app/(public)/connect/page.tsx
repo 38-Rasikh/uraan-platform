@@ -14,7 +14,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { CheckCircle, Loader2, Heart, Handshake, Users } from 'lucide-react'
+import {
+  CheckCircle,
+  Loader2,
+  Heart,
+  Handshake,
+  Users,
+  MessageSquare,
+  Mail,
+  Github,
+} from 'lucide-react'
 
 // ── Shared form state types ────────────────────────────────────────────────
 
@@ -87,7 +96,7 @@ function SectionCard({
 
 function SuccessBanner({ message }: { message: string }) {
   return (
-    <div className="flex items-center gap-3 rounded-lg bg-emerald-50 px-4 py-3 text-emerald-700">
+    <div className="flex items-center gap-3 rounded-lg bg-emerald-900/30 px-4 py-3 text-emerald-400">
       <CheckCircle className="h-5 w-5 flex-shrink-0" />
       <p className="text-sm font-medium">{message}</p>
     </div>
@@ -194,7 +203,7 @@ function VolunteerForm() {
         />
       </div>
 
-      {error && <p className="text-sm text-red-600">{error}</p>}
+      {error && <p className="text-sm text-red-400">{error}</p>}
 
       <Button
         type="submit"
@@ -383,6 +392,42 @@ export default function ConnectPage() {
           description="NGOs, corporates, and educational institutions — collaborate with us on outreach programs."
         >
           <PartnerForm />
+        </SectionCard>
+
+        {/* Contact Developers */}
+        <SectionCard
+          icon={<MessageSquare className="h-6 w-6" />}
+          title="Contact Developers"
+          description="Experiencing a bug, missing data, or have a feature request? Reach the platform team directly."
+        >
+          <div className="space-y-4">
+            <p className="text-sm text-[--color-text-secondary]">
+              This platform is maintained by the Uraan tech team at UET Lahore. We welcome bug
+              reports, accessibility feedback, and collaboration proposals.
+            </p>
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <a
+                href="mailto:dev@uraan.uet.edu.pk"
+                className="inline-flex items-center gap-2 rounded-lg border border-[--color-border] px-4 py-2.5 text-sm text-[--color-text-secondary] transition-colors hover:border-[--color-accent] hover:text-[--color-accent]"
+              >
+                <Mail className="h-4 w-4 flex-shrink-0" />
+                dev@uraan.uet.edu.pk
+              </a>
+              <a
+                href="https://github.com/uraan-uet"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-lg border border-[--color-border] px-4 py-2.5 text-sm text-[--color-text-secondary] transition-colors hover:border-[--color-accent] hover:text-[--color-accent]"
+                aria-label="Uraan on GitHub (opens in new tab)"
+              >
+                <Github className="h-4 w-4 flex-shrink-0" />
+                github.com/uraan-uet
+              </a>
+            </div>
+            <p className="text-xs text-[--color-text-muted]">
+              Response time is typically within 2–3 business days.
+            </p>
+          </div>
         </SectionCard>
       </div>
     </div>

@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { LogOut, User } from 'lucide-react'
+import { LogOut, User, Menu } from 'lucide-react'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,9 +13,10 @@ import {
 interface AdminHeaderProps {
   userEmail: string | undefined
   pageTitle?: string
+  onMenuToggle?: () => void
 }
 
-export function AdminHeader({ userEmail, pageTitle }: AdminHeaderProps) {
+export function AdminHeader({ userEmail, pageTitle, onMenuToggle }: AdminHeaderProps) {
   const router = useRouter()
 
   async function handleLogout() {
@@ -25,9 +26,20 @@ export function AdminHeader({ userEmail, pageTitle }: AdminHeaderProps) {
   }
 
   return (
-    <header className="flex h-16 items-center justify-between border-b border-zinc-800 bg-[--color-admin-bg] px-6">
-      {pageTitle && <h1 className="text-sm font-semibold text-white">{pageTitle}</h1>}
-      {!pageTitle && <span />}
+    <header className="flex h-16 items-center justify-between border-b border-zinc-800 bg-[--color-admin-bg] px-4">
+      <div className="flex items-center gap-3">
+        {/* Mobile hamburger */}
+        {onMenuToggle && (
+          <button
+            onClick={onMenuToggle}
+            className="rounded p-1.5 text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-white lg:hidden"
+            aria-label="Open navigation menu"
+          >
+            <Menu className="h-5 w-5" />
+          </button>
+        )}
+        {pageTitle && <h1 className="text-sm font-semibold text-white">{pageTitle}</h1>}
+      </div>
 
       <DropdownMenu>
         <DropdownMenuTrigger className="flex items-center gap-2 rounded-md px-3 py-1.5 text-xs text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-white">

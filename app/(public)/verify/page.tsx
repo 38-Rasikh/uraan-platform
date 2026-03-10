@@ -111,7 +111,7 @@ export default function VerifyPage() {
       </div>
 
       {/* Error */}
-      {error && <p className="mb-6 text-sm text-red-600">{error}</p>}
+      {error && <p className="mb-6 text-sm text-red-400">{error}</p>}
 
       {/* Results */}
       {results !== null && (
@@ -168,7 +168,7 @@ function VerifyCard({ org }: { org: VerifyResult }) {
 
         {/* Verification badge */}
         {org.is_verified ? (
-          <Badge className="flex items-center gap-1.5 bg-emerald-100 text-emerald-700">
+          <Badge className="flex items-center gap-1.5 bg-emerald-900/30 text-emerald-400">
             <ShieldCheck className="h-3.5 w-3.5" />
             {statusLabel}
           </Badge>
