@@ -14,7 +14,10 @@ const navLinks = [
 
 export function Navbar() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-[--color-border] bg-[--color-surface]">
+    <header
+      className="sticky top-0 z-50 w-full border-b border-[--color-border] backdrop-blur-md backdrop-saturate-150"
+      style={{ backgroundColor: 'var(--color-navbar-bg)' }}
+    >
       <div className="mx-auto flex h-16 max-w-container items-center justify-between px-4 sm:px-6">
         {/* Brand */}
         <Link
