@@ -80,3 +80,17 @@ Admin panel: [http://localhost:3000/admin/login](http://localhost:3000/admin/log
 | `npm run format`     | Prettier write                        |
 | `npm test`           | Vitest unit tests                     |
 | `npm run test:watch` | Vitest in watch mode                  |
+
+---
+
+## Updating an Existing Local Copy
+
+If you already have the project cloned and running, pull the latest changes and restart:
+
+```bash
+git pull origin main
+npm install        # picks up any new or updated dependencies
+npm run dev
+```
+
+> If the database schema has changed, re-run any new migration files from `supabase/migrations/` in the Supabase SQL Editor after pulling.
