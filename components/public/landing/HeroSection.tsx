@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 
 export default function HeroSection() {
@@ -12,6 +13,21 @@ export default function HeroSection() {
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E")`,
         }}
       />
+
+      {/* large watermark logo — top-right, very faint; hidden on mobile */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute right-0 top-0 hidden h-full w-1/2 items-center justify-end pr-4 opacity-[0.04] sm:flex md:pr-8"
+      >
+        <Image
+          src="/uraan-logo-white.png"
+          alt=""
+          width={480}
+          height={480}
+          className="h-auto w-48 select-none object-contain md:w-72 lg:w-[480px]"
+          priority
+        />
+      </div>
 
       {/* left accent line */}
       <div

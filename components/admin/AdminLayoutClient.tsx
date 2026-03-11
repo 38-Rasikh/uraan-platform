@@ -30,7 +30,7 @@ export function AdminLayoutClient({ children, userEmail }: AdminLayoutClientProp
       {/* Main content area */}
       <div className="flex flex-1 flex-col overflow-hidden">
         <AdminHeader userEmail={userEmail} onMenuToggle={() => setMobileSidebarOpen(true)} />
-        <main className="flex-1 overflow-y-auto bg-zinc-900 p-4 text-zinc-100 sm:p-6">
+        <main className="relative flex-1 overflow-y-auto bg-zinc-900 p-4 text-zinc-100 sm:p-6">
           {children}
         </main>
       </div>

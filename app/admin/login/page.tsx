@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { Eye, EyeOff, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -47,11 +48,20 @@ export default function AdminLoginPage() {
     <div className="dark flex min-h-screen items-center justify-center bg-[--color-admin-bg] p-4">
       <div className="w-full max-w-sm">
         {/* Brand */}
-        <div className="mb-8 text-center">
-          <p className="text-2xl font-semibold text-white">Uraan</p>
-          <p className="mt-1 text-xs uppercase tracking-widest text-zinc-500">
-            Admin Panel · Rahbar
-          </p>
+        <div className="mb-8 flex flex-col items-center gap-3">
+          <Image
+            src="/uraan-logo-white.png"
+            alt="Uraan logo"
+            width={56}
+            height={56}
+            className="h-14 w-14 object-contain"
+          />
+          <div className="text-center">
+            <p className="text-2xl font-semibold text-white">Uraan</p>
+            <p className="mt-1 text-xs uppercase tracking-widest text-zinc-500">
+              Admin Panel · Rahbar
+            </p>
+          </div>
         </div>
 
         <Card className="border-zinc-800 bg-[--color-admin-surface]">

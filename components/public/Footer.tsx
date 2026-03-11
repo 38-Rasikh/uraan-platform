@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Separator } from '@/components/ui/separator'
 import { Mail, Github } from 'lucide-react'
 
@@ -18,7 +19,16 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="space-y-3 lg:col-span-1">
-            <p className="text-lg font-semibold">Uraan</p>
+            <div className="flex items-center gap-2">
+              <Image
+                src="/uraan-logo-white.png"
+                alt="Uraan logo"
+                width={36}
+                height={36}
+                className="h-9 w-9 object-contain"
+              />
+              <p className="text-lg font-semibold">Uraan</p>
+            </div>
             <p className="text-sm text-zinc-400">Igniting Minds, Empowering Futures</p>
             <p className="text-sm text-zinc-500">Rahbar Project Division · UET Lahore</p>
           </div>
