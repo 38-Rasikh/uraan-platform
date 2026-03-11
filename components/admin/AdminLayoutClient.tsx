@@ -1,13 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import Image from 'next/image'
 import { AdminSidebar } from '@/components/admin/Sidebar'
 import { AdminHeader } from '@/components/admin/Header'
 import { Sheet, SheetContent } from '@/components/ui/sheet'
-import { Fullscreen } from 'lucide-react'
-import { maxSize } from 'zod'
-import { maximum } from 'zod/mini'
 
 interface AdminLayoutClientProps {
   children: React.ReactNode
