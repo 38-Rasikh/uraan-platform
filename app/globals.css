@@ -42,7 +42,7 @@
     --color-text-muted: #71717a;
     --color-accent: #e8620a;
     --color-accent-muted: rgba(232, 98, 10, 0.14);
-    --color-navbar-bg: rgba(24, 24, 27, 0.8);
+    --color-navbar-bg: rgba(24, 24, 27, 0.5);
     --color-admin-bg: #09090b;
     --color-admin-surface: #18181b;
 
@@ -86,7 +86,7 @@
     --color-text-muted: #a1a1aa;
     --color-accent: #e8620a;
     --color-accent-muted: #fef3ec;
-    --color-navbar-bg: rgba(255, 255, 255, 0.8);
+    --color-navbar-bg: rgba(255, 255, 255, 0.5);
 
     /* shadcn/ui tokens — light */
     --background: oklch(0.985 0 0);
