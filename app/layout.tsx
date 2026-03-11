@@ -11,6 +11,11 @@ export const metadata: Metadata = {
   title: 'Uraan — Igniting Minds, Empowering Futures',
   description:
     'Uraan Outreach Platform — Rahbar Project Division, UET Lahore. Orphanage directory, projects, and volunteer programmes.',
+  icons: {
+    icon: '/uraan-logo-black.png',
+    shortcut: '/uraan-logo-black.png',
+    apple: '/uraan-logo-black.png',
+  },
 }
 
 export const viewport: Viewport = {

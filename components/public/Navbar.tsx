@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Menu } from 'lucide-react'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import AccessibilityWidget from '@/components/public/AccessibilityWidget'
@@ -22,8 +23,22 @@ export function Navbar() {
         {/* Brand */}
         <Link
           href="/"
-          className="flex items-center gap-2 text-[--color-text-primary] transition-opacity hover:opacity-80"
+          className="flex items-center gap-2.5 text-[--color-text-primary] transition-opacity hover:opacity-80"
         >
+          <Image
+            src="/uraan-logo-white.png"
+            alt="Uraan logo"
+            width={32}
+            height={32}
+            className="h-8 w-8 object-contain [html[data-theme='light']_&]:hidden"
+          />
+          <Image
+            src="/uraan-logo-black.png"
+            alt="Uraan logo"
+            width={32}
+            height={32}
+            className="hidden h-8 w-8 object-contain [html[data-theme='light']_&]:block"
+          />
           <span className="text-lg font-semibold tracking-tight">Uraan</span>
           <span className="hidden text-xs text-[--color-text-muted] sm:block">
             Rahbar · UET Lahore

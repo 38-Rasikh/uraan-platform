@@ -93,7 +93,21 @@ export default function OrphanageCard({ orphanage: o }: OrphanageCardProps) {
         )}
 
         {o.uraan_visited ? (
-          <Badge className="border-[--color-accent]/30 border bg-[--color-accent-muted] text-xs text-[--color-accent]">
+          <Badge className="border-[--color-accent]/30 inline-flex items-center gap-1 border bg-[--color-accent-muted] text-xs text-[--color-accent]">
+            <Image
+              src="/uraan-logo-white.png"
+              alt=""
+              width={12}
+              height={12}
+              className="object-contain [html[data-theme='light']_&]:hidden"
+            />
+            <Image
+              src="/uraan-logo-black.png"
+              alt=""
+              width={12}
+              height={12}
+              className="hidden object-contain [html[data-theme='light']_&]:block"
+            />
             Uraan Visited
           </Badge>
         ) : (
@@ -125,7 +139,21 @@ export default function OrphanageCard({ orphanage: o }: OrphanageCardProps) {
             </span>
           )}
           {o.visit_count > 0 && (
-            <span className="text-xs text-[--color-text-muted]">
+            <span className="flex items-center gap-1 text-xs text-[--color-text-muted]">
+              <Image
+                src="/uraan-logo-white.png"
+                alt=""
+                width={14}
+                height={14}
+                className="object-contain [html[data-theme='light']_&]:hidden"
+              />
+              <Image
+                src="/uraan-logo-black.png"
+                alt=""
+                width={14}
+                height={14}
+                className="hidden object-contain [html[data-theme='light']_&]:block"
+              />
               {o.visit_count} visit{o.visit_count !== 1 ? 's' : ''}
             </span>
           )}

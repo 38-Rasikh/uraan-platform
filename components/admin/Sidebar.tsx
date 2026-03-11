@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { LayoutDashboard, Building2, ClipboardList, FolderOpen, Users, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -24,7 +25,14 @@ export function AdminSidebar({ onClose }: SidebarProps) {
     <aside className="flex h-full w-60 flex-col bg-[--color-admin-bg]">
       {/* Logo */}
       <div className="flex h-16 items-center justify-between border-b border-zinc-800 px-6">
-        <Link href="/admin/dashboard" className="flex items-center gap-2">
+        <Link href="/admin/dashboard" className="flex items-center gap-2.5">
+          <Image
+            src="/uraan-logo-white.png"
+            alt="Uraan logo"
+            width={28}
+            height={28}
+            className="h-7 w-7 object-contain"
+          />
           <span className="text-sm font-semibold text-white">Uraan</span>
           <span className="text-xs text-zinc-500">Admin</span>
         </Link>

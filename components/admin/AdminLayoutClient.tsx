@@ -1,9 +1,13 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { AdminSidebar } from '@/components/admin/Sidebar'
 import { AdminHeader } from '@/components/admin/Header'
 import { Sheet, SheetContent } from '@/components/ui/sheet'
+import { Fullscreen } from 'lucide-react'
+import { maxSize } from 'zod'
+import { maximum } from 'zod/mini'
 
 interface AdminLayoutClientProps {
   children: React.ReactNode
@@ -30,7 +34,7 @@ export function AdminLayoutClient({ children, userEmail }: AdminLayoutClientProp
       {/* Main content area */}
       <div className="flex flex-1 flex-col overflow-hidden">
         <AdminHeader userEmail={userEmail} onMenuToggle={() => setMobileSidebarOpen(true)} />
-        <main className="flex-1 overflow-y-auto bg-zinc-900 p-4 text-zinc-100 sm:p-6">
+        <main className="relative flex-1 overflow-y-auto bg-zinc-900 p-4 text-zinc-100 sm:p-6">
           {children}
         </main>
       </div>
